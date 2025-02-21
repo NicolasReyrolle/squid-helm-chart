@@ -1,15 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "squid-helm-chart.fullname" . }}
+  name: squid-service
   labels:
-    {{- include "squid-helm-chart.labels" . | nindent 4 }}
+    app: squid
 spec:
-  type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
+  - port: 3128
   selector:
-    {{- include "squid-helm-chart.selectorLabels" . | nindent 4 }}
+    app: squid
